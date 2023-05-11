@@ -8,6 +8,7 @@ import { RiSearchFill } from "react-icons/ri";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ColorButton from "./ui/ColorButton";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const CATEGORYS = [
   { icon: <AiOutlineHome />, link: "/", fillIcon: <AiFillHome /> },
@@ -17,6 +18,8 @@ const CATEGORYS = [
 
 export default function Nav() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+
   return (
     <section className=" flex items-center p-5 border justify-between">
       <Link href="/">
@@ -35,7 +38,11 @@ export default function Nav() {
             </Link>
           );
         })}
-        <ColorButton text="Sign in" onClick={() => {}} />
+        {session ? (
+          <ColorButton text="Sign out" onClick={() => signOut()} />
+        ) : (
+          <ColorButton text="Sign in" onClick={() => signIn()} />
+        )}
       </section>
     </section>
   );

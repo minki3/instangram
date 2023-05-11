@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Open_Sans } from "next/font/google";
-import Nav from "./components/Nav";
+import Nav from "@/components/Nav";
+import AuthContext from "@/context/AuthContext";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={openSans.className}>
       <body className="w-full max-w-screen-2xl overflow-auto mx-auto">
-        <header className="sticky top-0 bg-wihte z-10 border-b">
-          <Nav />
-        </header>
-        <main>{children}</main>
+        <AuthContext>
+          <header className="sticky top-0 bg-wihte z-10 border-b">
+            <Nav />
+          </header>
+          <main>{children}</main>
+        </AuthContext>
       </body>
     </html>
   );
