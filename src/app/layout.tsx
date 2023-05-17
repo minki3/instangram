@@ -2,6 +2,7 @@ import "./globals.css";
 import { Open_Sans } from "next/font/google";
 import Nav from "@/components/Nav";
 import AuthContext from "@/context/AuthContext";
+import SwrConfigContext from "@/context/SwrConfigContext";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
           <header className="sticky top-0 bg-wihte z-10 border-b">
             <Nav />
           </header>
-          <main>{children}</main>
+          <main>
+            <SwrConfigContext>{children} </SwrConfigContext>
+          </main>
         </AuthContext>
       </body>
     </html>
